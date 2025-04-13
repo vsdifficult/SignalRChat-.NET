@@ -1,0 +1,55 @@
+@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Chat";
+}
+
+<div class="container">
+    <div class="row">&nbsp;</div>
+    <div class="row">
+        <div class="col-2">User</div>
+        <div class="col-4"><input type="text" id="userInput" /></div>
+    </div>
+    <div class="row">
+        <div class="col-2">Message</div>
+        <div class="col-4"><input type="text" id="messageInput" /></div>
+    </div>
+    <div class="row">&nbsp;</div>
+    <div class="row">
+        <div class="col-6">
+            <input type="button" id="sendButton" value="Send Message" />
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+        <hr />
+    </div>
+</div>
+<div class="row">
+    <div class="col-6">
+        <ul id="messagesList"></ul>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.0/signalr.min.js"></script>
+<script>
+    const connection = new signalR.HubConnectionBuilder()
+        .withUrl("/chatHub")
+        .build();
+
+    connection.on("ReceiveMessage", (user, message) => {
+        const li = document.createElement("li");
+        li.textContent = `${user}: ${message}`;
+        document.getElementById("messagesList").appendChild(li);
+    });
+
+    connection.start().catch(err => console.error(err.toString()));
+
+    document.getElementById("sendButton").addEventListener("click", event => {
+        const user = document.getElementById("userInput").value;
+        const message = document.getElementById("messageInput").value;
+        connection.invoke("SendMessage", user, message).catch(err => console.error(err.toString()));
+        event.preventDefault();
+    });
+</script>

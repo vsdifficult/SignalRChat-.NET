@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "C0AK1vuJj808gvS6ARnD7q5o1c0DRQPK4MEQdYJtgm0=",
+  "Source": "SIGRChat",
+  "BasePath": "_content/SIGRChat",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}

@@ -1,0 +1,6 @@
+@SIGRChat_HostAddress = http://localhost:5127
+
+GET {{SIGRChat_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
